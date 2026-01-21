@@ -2,6 +2,9 @@ package com.example.listycity;
 import java.io.Serializable;
 
 public class City implements Serializable{
+
+    //city class
+    //Serializable implemented to create a bundle (how we pass the data into fragments)
     private String name;
     private String province;
 
