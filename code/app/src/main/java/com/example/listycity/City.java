@@ -1,6 +1,7 @@
 package com.example.listycity;
+import java.io.Serializable;
 
-public class City {
+public class City implements Serializable{
     private String name;
     private String province;
 
@@ -9,11 +10,23 @@ public class City {
         this.province = province;
     }
 
+
+    //getters
     public String getName() {
         return name;
     }
 
     public String getProvince() {
         return province;
+    }
+
+
+    //setters
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
     }
 }

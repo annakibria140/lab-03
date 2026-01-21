@@ -10,7 +10,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements AddCityFragment.AddCityDialogListener {
+public class MainActivity extends AppCompatActivity implements AddCityFragment.AddCityDialogListener, EditCityFragment.EditCityListener {
 
     private ArrayList<City> dataList;
     private ListView cityList;
@@ -36,6 +36,13 @@ public class MainActivity extends AppCompatActivity implements AddCityFragment.A
         cityAdapter = new CityArrayAdapter(this, dataList);
         cityList.setAdapter(cityAdapter);
 
+        cityList.setOnItemClickListener((parent, view, position, id) -> {
+            City clicked = dataList.get(position);
+            EditCityFragment.newInstance(clicked, position)
+                    .show(getSupportFragmentManager(), "EDIT_CITY");
+        });
+
+
         FloatingActionButton fab = findViewById(R.id.button_add_city);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +55,12 @@ public class MainActivity extends AppCompatActivity implements AddCityFragment.A
     @Override
     public void addCity(City city) {
         dataList.add(city);
+        cityAdapter.notifyDataSetChanged();
+    }
+
+    public void OnCityEdited(int position, City city) {
+        // If you mutated the same City object, you technically don’t need set(),
+        // but it's fine either way. The key part is notifyDataSetChanged().
         cityAdapter.notifyDataSetChanged();
     }
 }
